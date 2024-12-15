@@ -20,21 +20,43 @@ PrintArray(const std::array<T, N>& arr, std::ostream& stream)
 auto
 main(int /*unused*/, char** /*unused*/) -> int
 {
-  std::array arr = { 6, 3, 5, 9, 1, 8 };
+  {
+    std::array arr = { 6, 3, 5, 9, 1, 8, 0};
 
-  std::cout << "-------------------\n";
-  std::cout << "timeout_sort\n";
-  std::cout << "-------------------\n";
+    std::cout << "-------------------\n";
+    std::cout << "timeout_sort_thread\n";
+    std::cout << "-------------------\n";
 
-  std::cout << "array before sorting=";
-  PrintArray(arr, std::cout);
+    std::cout << "array before sorting=";
+    PrintArray(arr, std::cout);
+    std::cout << "\n";
+
+    timeout_sort_thread(arr.begin(), arr.end());
+
+    std::cout << "array after sorting= ";
+    PrintArray(arr, std::cout);
+    std::cout << "\n";
+  }
+
   std::cout << "\n";
 
-  timeout_sort(arr.begin(), arr.end());
+  {
+    std::array arr = { 6, 3, 5, 9, 1, 8, 0 };
 
-  std::cout << "array after sorting= ";
-  PrintArray(arr, std::cout);
-  std::cout << "\n";
+    std::cout << "-------------------\n";
+    std::cout << "timeout_sort_async\n";
+    std::cout << "-------------------\n";
+
+    std::cout << "array before sorting=";
+    PrintArray(arr, std::cout);
+    std::cout << "\n";
+
+    timeout_sort_async(arr.begin(), arr.end());
+
+    std::cout << "array after sorting= ";
+    PrintArray(arr, std::cout);
+    std::cout << "\n";
+  }
 
   return 0;
 }
